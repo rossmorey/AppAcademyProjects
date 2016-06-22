@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    # fail, uncomment to see params upon form submit
     @article = Article.new(article_params)
     @article.save
 
@@ -20,6 +21,7 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+    fail
     @article = Article.find(params[:id])
   end
 
