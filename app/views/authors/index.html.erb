@@ -2,7 +2,7 @@
 
 <h1>Listing Authors</h1>
 
-<table>
+<table id="authors" >
   <thead>
     <tr>
       <th>Username</th>
@@ -16,9 +16,9 @@
       <tr>
         <td><%= author.username %></td>
         <td><%= author.email %></td>
-        <td><%= link_to 'Show', author %></td>
-        <td><%= link_to 'Edit', edit_author_path(author) %></td>
-        <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'show', author %> |</td>
+        <td><%= link_to 'edit', edit_author_path(author) %> |</td>
+        <td><%= link_to 'delete', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

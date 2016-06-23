@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
   def create
     # fail, uncomment to see params upon form submit
     @article = Article.new(article_params)
+    @article.author_id = current_user.id
     @article.save
 
     flash.notice = "Article '#{@article.title}' was created."
@@ -21,12 +22,12 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    fail
     @article = Article.find(params[:id])
   end
 
   def show
     @article = Article.find(params[:id])
+    increment_view_count
     @comment = Comment.new
     @comment.article_id = @article.id
   end

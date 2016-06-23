@@ -2,18 +2,18 @@
 
 <%= form_tag author_sessions_path, method: :post do %>
   <div class="field">
-    <%= label_tag :email %>
+    <%= label_tag :email %><br/>
     <%= text_field_tag :email %>
-    <br/>
   </div>
+  <br/>
   <div class="field">
-    <%= label_tag :password %>
+    <%= label_tag :password %><br/>
     <%= password_field_tag :password %>
-    <br/>
   </div>
+  <br />
   <div class="actions">
     <%= submit_tag "Login" %>
   </div>
 <% end %>
-
+<br />
 <%= link_to 'Back', articles_path %>
