@@ -1,0 +1,12 @@
+--- !ruby/object:Tile
+bomb: false
+reveal: false
+flag: false
+num_adj_bombs: 0
+ 
+--- !ruby/object:Tile
+bomb: false
+reveal: false
+flag: false
+num_adj_bombs: 0
+ 

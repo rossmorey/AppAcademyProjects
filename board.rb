@@ -1,5 +1,6 @@
 require_relative 'tile'
 require 'colorize'
+require 'yaml'
 
 DIRECTIONS = [[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1]]
 
@@ -89,7 +90,28 @@ class Board
     end
   end
 
+  def board_export_yaml
+    array = []
+    array << @grid[0][0]
+    array << @grid[0][1]
+    text = YAML::dump(array)
+    File.open("save.txt","w") do |file|
+      array.each do |tile|
+        file.puts YAML::dump(tile)
+        file.puts " "
+      end
+    end
+    # print text
+    # print YAML::load(text)
+  end
 
+  def board_load_yaml
+    array = []
+    File.open("save.txt","r").each do |object|
+      array << YAML::load(object)
+    end
+    array
+  end
 
 
 
@@ -99,3 +121,9 @@ class Board
     @grid[row][col]
   end
 end
+
+a = Board.new
+a.board_export_yaml
+array = a.board_load_yaml
+puts
+puts array[1].class

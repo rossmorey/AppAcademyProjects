@@ -49,6 +49,7 @@ class Minesweeper
     array = string.split(",")
     array.map{|x| x.to_i}
   end
+  
 end
 
 if __FILE__ == $PROGRAM_NAME
