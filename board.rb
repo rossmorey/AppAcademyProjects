@@ -63,6 +63,37 @@ class Board
     won = correctly_flagged_count == bomb_count && flag_count == bomb_count
   end
 
+  def chain_reveal(coords)
+    current_tile = self[coords]
+    current_tile.reveal
+    # return "done" unless self[coords] == 0
+    if current_tile.show_num == 0
+      row_idx, col_idx = coords
+      DIRECTIONS.each do |directions|
+        drow, dcol = directions
+        newrow = row_idx + drow
+        newcol = col_idx + dcol
+        newpoint = [newrow,newcol]
+        # print "self[newpoint].nil? #{self[newpoint].nil?} "
+        # puts
+        # next if self[newpoint].nil?
+        next unless newrow.between?(0,@grid_size-1)
+        next unless newcol.between?(0,@grid_size-1)
+        # print "self[newpoint].is_visible? #{self[newpoint].is_visible?}"
+        # puts
+        next if self[newpoint].is_visible?
+        # print "coordinates being sent to chain_reveal #{newpoint}"
+        # puts
+        chain_reveal(newpoint)
+      end
+    end
+  end
+
+
+
+
+
+
   def [](array)
     row, col = array
     @grid[row][col]

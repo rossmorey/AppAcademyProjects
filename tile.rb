@@ -13,6 +13,14 @@ class Tile
     @reveal = true
   end
 
+  def is_hidden?
+    !@reveal
+  end
+
+  def is_visible?
+    @reveal
+  end
+
   def flag
     @flag = true
   end
@@ -35,6 +43,10 @@ class Tile
 
   def set_num(num)
     @num_adj_bombs = num
+  end
+
+  def show_num
+    @num_adj_bombs
   end
 
   def to_s(debug=false)

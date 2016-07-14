@@ -19,7 +19,7 @@ class Minesweeper
       if current_tile.is_bomb?
         return "BOOM!"
       else
-        @board[coords].reveal
+        @board.chain_reveal(coords)
       end
     when :f
       @board[coords].flag
@@ -28,13 +28,6 @@ class Minesweeper
     when :debug
       @board.render(true)
     end
-
-    #get input
-    #flip Tile
-    #if tile is a bomb we lose
-    #if tile is not a bomb, reveal it
-    #if tile == 0 , reveal more tiles
-    @board.render
   end
 
   def run
@@ -45,7 +38,6 @@ class Minesweeper
 
       end
     end
-    @board.render
     puts "you won!"
   end
 
