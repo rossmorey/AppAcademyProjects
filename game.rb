@@ -3,8 +3,12 @@ require_relative 'tile'
 
 
 class Minesweeper
-  def initialize
-    @board = Board.new
+  def initialize()
+    puts "how large do you want your board?"
+    size = gets.chomp.to_i
+    puts "how hard do you want the game to be, e.g. 1 (easy) or 10 (hard)"
+    level = gets.chomp.to_i
+    @board = Board.new(size, level)
     @start_time = Time.new
   end
 
@@ -70,5 +74,6 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   a = Minesweeper.new
+
   a.run
 end

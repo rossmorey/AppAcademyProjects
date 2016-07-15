@@ -7,10 +7,11 @@ DIRECTIONS = [[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,1]]
 class Board
 
 
-  def initialize(grid = 9, num_bombs = 10)
+  def initialize(grid = 9, level = 3)
     @grid_size = grid
     @grid = Array.new(grid) { Array.new(grid) {Tile.new} }
-    @num_bombs = num_bombs
+    percentage = level.fdiv(11)
+    @num_bombs = (percentage * @grid_size ** 2).to_i
     place_bombs
     populate_counts
   end
@@ -26,6 +27,11 @@ class Board
         print "[#{x.to_s(debug)}]"
       end
       puts
+    end
+    if debug
+      puts "press enter when done"
+      gets
+      system("clear")
     end
   end
 
