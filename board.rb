@@ -22,7 +22,11 @@ class Board
   end
 
   def render(debug=false)
-    @grid.each do |row|
+    print "  "
+    (0...@grid_size).each { |n| print " #{n} "}
+    puts
+    @grid.each_with_index do |row, idx|
+      print "#{idx} "
       row.each do |x|
         print "[#{x.to_s(debug)}]"
       end

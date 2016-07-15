@@ -54,10 +54,6 @@ class Tile
     return "f".colorize(:light_blue) if @flag
     color = @num_adj_bombs == 0? :blue : :yellow
     return @num_adj_bombs.to_s.colorize(color) if @reveal || debug
-    " "
-    if debug
-      puts "press enter when ready"
-      gets
-    end
+    return " "
   end
 end
