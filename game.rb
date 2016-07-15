@@ -1,9 +1,11 @@
 require_relative 'board'
 require_relative 'tile'
 
+
 class Minesweeper
   def initialize
     @board = Board.new
+    @start_time = Time.new
   end
 
   def play_turn
@@ -27,6 +29,10 @@ class Minesweeper
       @board[coords].unflag
     when :debug
       @board.render(true)
+    when :save
+      @board.board_export_yaml
+    when :load
+      @board.board_load_yaml
     end
   end
 
@@ -34,11 +40,21 @@ class Minesweeper
     until @board.won?
       if play_turn == "BOOM!"
         puts "you lose!"
+        puts "it took you"
+        puts time_elapsed.to_s + " seconds"
+        puts "to lose "
         return "loser"
 
       end
     end
     puts "you won!"
+    puts "it took you"
+    puts time_elapsed.to_s + " seconds"
+    puts "to win"
+  end
+
+  def time_elapsed
+    Time.new - @start_time
   end
 
   def parse_action(string)
@@ -49,7 +65,7 @@ class Minesweeper
     array = string.split(",")
     array.map{|x| x.to_i}
   end
-  
+
 end
 
 if __FILE__ == $PROGRAM_NAME
