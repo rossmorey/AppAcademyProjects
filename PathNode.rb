@@ -28,6 +28,12 @@ class PathNode
     # child_node.children.each {|child| child.parent = self}
   end
 
+  def trace_path_back(root, path_array = [])
+    path_array << self.value
+    return path_array if self.value == root.value
+    self.parent.trace_path_back(root, path_array)
+  end
+
   def dfs(target_value)
     return self if self.value == target_value
     children.each do |child|

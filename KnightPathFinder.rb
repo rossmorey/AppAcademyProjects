@@ -2,30 +2,32 @@ require_relative "PathNode.rb"
 
 class KnightPathFinder
 
-  BOARD_LENGTH = 8
-
   SHIFT = [
     [1, -2],
     [2, -1],
     [2, 1],
-    [1, -2],
+    [1, 2],
     [-1, 2],
-    [-2, -1],
     [-2, 1],
-    [-1, 2]
+    [-2, -1],
+    [-1, -2]
   ]
 
-  attr_reader :position
+  attr_reader :position, :root
 
   def initialize(position)
     @position = position
     @visited_positions = [position]
+    @move_tree = build_move_tree(@position)
+  end
 
-    # build_move_tree
+  def find_path(end_pos)
+    end_node = @root.bfs(end_pos)
+    end_node.trace_path_back(@root)
   end
 
   def build_move_tree(start_pos)
-    root = PathNode.new(start_pos)
+    @root = PathNode.new(start_pos)
     nodes = [root]
     until nodes.empty?
       current_node = nodes.shift
@@ -35,7 +37,7 @@ class KnightPathFinder
         nodes << new_node
       end
     end
-    root
+    @root
   end
 
   def new_move_positions(pos)
