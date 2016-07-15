@@ -43,6 +43,7 @@ class Minesweeper
   def run
     until @board.won?
       if play_turn == "BOOM!"
+        system('say "you lose"')
         puts "you lose!"
         puts "it took you"
         puts time_elapsed.to_s + " seconds"
@@ -52,6 +53,7 @@ class Minesweeper
       end
     end
     puts "you won!"
+    system('say "you win"')
     puts "it took you"
     puts time_elapsed.to_s + " seconds"
     puts "to win"
