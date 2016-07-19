@@ -1,3 +1,5 @@
+require_relative 'slideable.rb'
+require_relative 'stepable.rb'
 class Piece
   attr_accessor :color, :board, :position
 
@@ -7,9 +9,24 @@ class Piece
     @position = position
   end
 
+  def position_on_board?(pos)
+    x, y = pos
+    return true if x.between?(0, 7) && y.between?(0, 7)
+    false
+  end
+
+  def empty?
+    return false
+  end
+
   def to_s
     " #{symbol.to_s} "
   end
+
+  def valid_moves
+    moves
+  end
+
   # def moves
   #
   # end

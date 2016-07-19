@@ -23,7 +23,10 @@ class Board
     selected_piece = self[start]
     valid_moves = selected_piece.valid_moves
     if valid_moves.include?(end_pos) && !selected_piece.empty?
-      self[start], self[end_pos] = self[end_pos], self[start]
+      self[end_pos] = self[start]
+      self[start] = NullPiece.instance
+
+      # self[start], self[end_pos] = self[end_pos], self[start]
       selected_piece.position = end_pos
     end
   end
@@ -42,8 +45,8 @@ class Board
 
 
   def populate
-    @grid[6] = pawn_row(:black, 6)
-    @grid[1] = pawn_row(:white, 1)
+    # @grid[6] = pawn_row(:black, 6)
+    # @grid[1] = pawn_row(:white, 1)
     other_row(:black, 7)
     other_row(:white, 0)
   end

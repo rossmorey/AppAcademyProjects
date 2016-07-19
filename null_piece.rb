@@ -5,10 +5,10 @@ class NullPiece
     "   "
   end
   def empty?
-    returns true
+    true
   end
 
   def color
-    "   "
+    "  "
   end
 end
