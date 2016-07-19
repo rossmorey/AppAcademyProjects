@@ -45,8 +45,8 @@ class Board
 
 
   def populate
-    # @grid[6] = pawn_row(:black, 6)
-    # @grid[1] = pawn_row(:white, 1)
+    @grid[6] = pawn_row(:black, 6)
+    @grid[1] = pawn_row(:white, 1)
     other_row(:black, 7)
     other_row(:white, 0)
   end

@@ -1,6 +1,6 @@
 module Slideable
   HORIZONTAL_SHIFT = [ [0, -1], [ -1, 0 ], [0, 1], [1, 0] ]
-  # DIAGONAL_SHIFT = [ [r-1, c-1], [r-1, c+1], [r+1, c+1], [r, c-1]  ]
+  DIAGONAL_SHIFT = [ [-1, -1], [-1, 1], [1, 1], [1, -1]  ]
 
   def moves()
     moves = []
@@ -18,22 +18,15 @@ module Slideable
     end
     horizontals
   end
-  def capturable?(pos)
-    #return false if @board[pos].empty?
-    return true if @board[pos].color != self.color
-    false
-
-    # HORIZONTAL_SHIFT.each do |arr|
-    #   hotizontals << [arr.first + x, arr.last + y]
-    # end
-    # result = []
-    # horizontals.each do |horizontal|
-    #   result << grow_unblocked_moves_in_dir(horizontal.first, horizontal.last)
-    # end
-    # result
-  end
 
   def diagonal_dirs
+    diagonals = []
+    x, y = position
+
+    DIAGONAL_SHIFT.each do |shift|
+      diagonals.concat(grow_unblocked_moves_in_dir(position, shift))
+    end
+    diagonals
   end
 
 
@@ -46,16 +39,6 @@ module Slideable
       current = [current.first + shift.first, current.last + shift.last]
     end
     moves
-  end
-
-  def valid_move?(pos)
-    return false unless position_on_board?(pos) #return false if it's not on the board
-    result = true
-    unless @board[pos].empty?
-      result = false
-      result = true if capturable?(pos)
-    end
-    result
   end
 
 end
