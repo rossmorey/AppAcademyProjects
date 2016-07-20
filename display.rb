@@ -38,6 +38,7 @@ class Display
 
   def render
     system("clear")
+    [:white, :black].each{ |color| puts "#{color} in check!" if @board.in_check?(color) }
     puts "Fill the grid!"
     puts "Arrow keys, WASD, or vim to move, space or enter to confirm."
     build_grid.each { |row| puts row.join }

@@ -1,12 +1,12 @@
 require_relative 'null_piece.rb'
 require_relative 'piece.rb'
+require 'byebug'
 
 class Board
   attr_accessor :grid
 
   def initialize(grid = Array.new(8) { Array.new(8) { NullPiece.instance } })
     @grid = grid
-    populate
   end
 
   def [](pos)
@@ -20,7 +20,12 @@ class Board
   end
 
   def move_piece(color, start, end_pos)
+    # debugger
     selected_piece = self[start]
+    if board.dup.move_piece(color, start, end_pos).in_check?(color)
+      Raise "Can't put yourself in check!"
+    end
+    # return if selected_piece.empty?
     valid_moves = selected_piece.valid_moves
     if valid_moves.include?(end_pos) && !selected_piece.empty?
       self[end_pos] = self[start]
@@ -43,6 +48,22 @@ class Board
     pawn_row
   end
 
+  def dup
+    debugger
+    result = Board.new
+    current = grid.flatten
+    8.times do |idx|
+      8.times do |jdx|
+        old = current.shift
+        if old.class == NullPiece
+          result[[idx, jdx]] = NullPiece.instance
+        else
+          result[[idx, jdx]] = old.class.new(old.color, result, old.position)
+        end
+      end
+    end
+    result
+  end
 
   def populate
     @grid[6] = pawn_row(:black, 6)
@@ -58,15 +79,18 @@ class Board
       @grid[row][idx] = piece.new(color, self, [row, idx])
     end
   end
-  # def populate
-  #   color = {:white => 1, :black => 7}
-  #   8.times do |idx|
-  #     # @grid[color[:white]][idx] = Pawn.new(color, self, [color[:white], idx])
-  #     color.each do |k, v|
-  #       @grid[color[k]][idx] = Pawn.new(k, self, [color[k], [idx]])
-  #     end
-  #   end
 
+  def in_check?(color)
+    opposite_color = {white: :black, black: :white}
+    enemy_pieces = @grid.flatten.select{ |piece| piece.color == opposite_color[color] }
+    king_pos = find_king(color)
+    enemy_pieces.each do |piece|
+      return true if piece.moves.include?(king_pos)
+    end
+    false
+  end
 
-
+  def find_king(color)
+    @grid.flatten.select{ |piece| piece.color == color && piece.is_a?(King)}[0].position
+  end
 end

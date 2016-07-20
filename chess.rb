@@ -3,7 +3,6 @@ require_relative 'player.rb'
 
 class Game
   attr_accessor :player, :board
-
   def initialize(board = Board.new, player = nil)
     player ||= Player.new(board)
     @board = board
@@ -11,6 +10,7 @@ class Game
   end
 
   def run
+    @board.populate
     while true
       start_pos = player.move
       piece = board[start_pos]

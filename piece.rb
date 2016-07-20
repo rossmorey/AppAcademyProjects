@@ -43,6 +43,14 @@ class Piece
     false
   end
 
+  def move_into_check?(pos)
+
+    return if self.empty?
+    copy = @board.dup
+    copy.move_piece(self.color, self.position, pos)
+    copy.in_check?(self.color)
+  end
+
 end
 
 class Rook < Piece
