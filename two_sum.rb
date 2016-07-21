@@ -18,31 +18,55 @@ end
 def okay_two_sum?(arr, value)
   # arr.sort.each_with_index
   sorted = arr.sort
-  p sorted
-  queries = []
-  sorted.each do |n|
+  # p sorted
+  arr.each do |n|
     diff = value - n
-    unless diff == n #&& sorted.count(diff) <= 1
-      queries << diff
-    end
+    return true if bsearch(sorted, diff)
   end
-  p queries
-  queries.each do |val|
-    return true if sorted.include?(val)
-  end
+
   false
+  #
+  # queries = []
+  # sorted.each do |n|
+  #   diff = value - n
+  #   unless diff == n #&& sorted.count(diff) <= 1
+  #     queries << diff
+  #   end
+  # end
+  # p queries
+  # queries.each do |val|
+  #   return true if sorted.include?(val)
+  # end
+  # false
 end
 
-def quick_sort(arr)
-  return arr if arr.length <= 1
-  pivot = arr.shift
-  left, right = arr.partition{|n| n < pivot}
-  quick_sort(left) + [pivot] + quick_sort(right)
+def bsearch(arr, target)
+  return nil if arr.empty?
+  mid = arr.length / 2
+  left = arr.take(mid)
+  right = arr.drop(mid + 1)
+  case target <=> arr[mid]
+  when -1
+    bsearch(left, target)
+  when 0
+    mid
+  when 1
+    sub_a = bsearch(right, target)
+    sub_a.nil? ? nil : (mid + 1) + sub_a
+  end
 end
 
-# arr = [2, 1, 5, 7]
-# p okay_two_sum?(arr, 6)
-# p okay_two_sum?(arr, 10)
+#
+# def quick_sort(arr)
+#   return arr if arr.length <= 1
+#   pivot = arr.shift
+#   left, right = arr.partition{|n| n < pivot}
+#   quick_sort(left) + [pivot] + quick_sort(right)
+# end
+
+arr = [2, 1, 5, 7]
+p okay_two_sum?(arr, 6)
+p okay_two_sum?(arr, 10)
 
 #time complexity: n log n
 
@@ -52,18 +76,13 @@ def hash_sort(arr, value)
   queries = []
   arr.each do |n|
     diff = value - n
-    unless diff == n #&& sorted.count(diff) <= 1
-      queries << diff
-    end
-  end
-  queries.each do |val|
-    return true if hash[val] > 0
+    return true if hash[diff] > 0
   end
   false
 end
 
-arr = [2, 1, 5, 7]
-p hash_sort(arr, 6)
-p hash_sort(arr, 10)
+# arr = [2, 1, 5, 7]
+# p hash_sort(arr, 6)
+# p hash_sort(arr, 10)
 
 # time complexity O(n)
