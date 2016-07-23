@@ -1,4 +1,4 @@
-require "byebug"
+# require "byebug"
 
 class Fixnum
   # Fixnum#hash already implemented for you
@@ -9,7 +9,7 @@ class Array
     return 22345231 if self == []
     hash_val = 0
     self.each do |el|
-      return 22345231 if el == []      
+      return 22345231 if el == []
       hash_val += el.to_s(2).to_i
     end
     hash_val = hash_val.to_s(2).to_i^self.last.to_s(2).to_i

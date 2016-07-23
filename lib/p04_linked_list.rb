@@ -14,16 +14,24 @@ class Link
 end
 
 class LinkedList
+  include Enumerable
+
+  attr_accessor :sen_two
+
   def initialize
-    @sen_one = Link.new(:first, nil)
-    @sen_two = Link.new(:last, nil)
+    @sen_one = Link.new(:head, nil)
+    @sen_two = Link.new(:tail, nil)
     @sen_one.next = @sen_two
     @sen_two.prev = @sen_one
     @store = [@sen_one, @sen_two]
   end
 
   def [](i)
-    @store.each_with_index { |link, j| return link if i == j }
+    count =0
+    each do |link|
+      return link if i == count
+      count += 1
+    end
     nil
   end
 
@@ -40,11 +48,15 @@ class LinkedList
   end
 
   def get(key)
-
+    each {|link| return link.val if link.key == key}
+    nil
   end
 
   def include?(key)
+    each {|link| return true if link.key == key}
+    false
   end
+
 
   def insert(key, val)
     link = Link.new(key, val)
@@ -54,16 +66,36 @@ class LinkedList
     before.next = link
     link.prev = before
     @sen_two.prev = link
+    link
   end
 
   def remove(key)
+    each do |link|
+      if link.key == key
+        link.prev.next, link.next.prev = link.next, link.prev
+#        link.val = nil
+        return link
+      end
+    end
+    nil
   end
 
-  def each
+  def each(&prc)
+    link = first
+    until link.next.nil?
+      prc.call(link)
+      link = link.next
+    end
+  end
+
+  def length
+    l = 0
+    each { |link| l += 1 }
+    return l
   end
 
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
-  # end
+  def to_s
+    inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
+  end
 end
