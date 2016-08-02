@@ -8,8 +8,7 @@ class UsersController < ApplicationController
   end
 
     def create
-      user = User.new(params[:user].permit(:name, :email))
-      # debugger
+      user = User.new(params[:user].permit(:username))
        if user.save
          render json: user
       else
@@ -21,7 +20,6 @@ class UsersController < ApplicationController
 
     def show
       user = User.find_by(id: params[:id])
-      # fail
       render json: user
     end
 
@@ -48,6 +46,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-      params.require(:user).permit(:name, :email)
+      params.require(:user).permit(:username)
     end
 end
