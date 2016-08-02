@@ -1,0 +1,32 @@
+<h1><%= @cat.name %></h1>
+<table>
+  <tr>
+    <td>
+      Age:
+    </td>
+    <td>
+      <%= @cat.age %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Color:
+    </td>
+    <td>
+      <%= @cat.color %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Sex:
+    </td>
+    <td>
+      <%= @cat.sex %>
+    </td>
+  </tr>
+</table>
+<p>
+  <%= @cat.description %>
+</p>
+<%= link_to "Edit cat", edit_cat_url(@cat) %>
+<%= link_to 'homepage', cats_url %>
