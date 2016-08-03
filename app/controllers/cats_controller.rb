@@ -33,7 +33,17 @@ class CatsController < ApplicationController
       redirect_to cat_url(@cat)
     else
       @errors = @cat.errors.full_messages
-      render :new
+      render :edit
+    end
+  end
+
+  def destroy
+    @cat = Cat.find_by(id: params[:id])
+    if @cat.destroy
+      redirect_to cats_url
+    else
+      flash[:notice] = "Could not delete for some reason"
+      redirect_to cat_url(@cat)
     end
   end
 

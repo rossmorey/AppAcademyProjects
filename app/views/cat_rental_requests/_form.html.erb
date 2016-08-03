@@ -14,7 +14,7 @@
 
   <label>
     Cat:
-    <select name="cat_rental_request[id]">
+    <select name="cat_rental_request[cat_id]">
       <option selected disabled> </option>
       <% cats.each do |cat| %>
         <option value="<%= cat.id %>" <%= "selected" if request.cat_id == cat.id %> >

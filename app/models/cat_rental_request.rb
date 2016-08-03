@@ -29,4 +29,22 @@ class CatRentalRequest < ActiveRecord::Base
     end
   end
 
+  def approve!
+    # self.transaction do
+    unless self.update(status: "APPROVED")
+      self.update(status: "DENIED")
+    end
+    #   if overlapping_requests
+    #
+    #
+    #   else
+    #     # debugger
+    #
+    #     self.update(status: "APPROVED")
+    #   end
+    #
+    # # end
+
+  end
+
 end
