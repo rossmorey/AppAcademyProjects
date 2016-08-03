@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+  before_action :redirect_to_cats, except: :destroy  
   def new
 
   end
@@ -23,6 +23,10 @@ class SessionsController < ApplicationController
 
 
   private
+
+  def redirect_to_cats
+    redirect_to cats_url if current_user
+  end
 
   def session_params
     params.require(:sessions).permit(:user_name, :password)
