@@ -20,9 +20,10 @@
   <tr>
     <th>Start Date</th>
     <th>End Date</th>
+    <th>Requester</th>
     <th>Status</th>
   </tr>
-  <% @cat.rental_requests.order("start_date").each do |req| %>
+  <% @cat.rental_requests.includes(:requester).order("start_date").each do |req| %>
     <%= render "req_tr", req: req %>
   <% end %>
 </table>

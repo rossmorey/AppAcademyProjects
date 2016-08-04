@@ -3,6 +3,11 @@ class CatRentalRequest < ActiveRecord::Base
 
   belongs_to :cat
 
+  belongs_to :requester,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: :User
+
   after_initialize :assign_pending_status
 
   validates(
@@ -10,6 +15,7 @@ class CatRentalRequest < ActiveRecord::Base
     :end_date,
     :start_date,
     :status,
+    :user_id,
     presence: true
   )
   validates :status, inclusion: STATUS_STATES

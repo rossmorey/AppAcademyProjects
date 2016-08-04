@@ -1,4 +1,7 @@
 class CatsController < ApplicationController
+  before_action :not_logged_in, only: [:new, :create]
+  before_action :edit_own_cat, except: [:index, :show, :new, :create]
+
   def index
     @cats = Cat.all
     render :index
@@ -16,6 +19,7 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.user_id = current_user.id
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -40,6 +44,13 @@ class CatsController < ApplicationController
   end
 
   private
+
+  def not_logged_in
+    redirect_to  cats_url unless current_user
+  end
+  def edit_own_cat
+    redirect_to cats_url if current_user.cats.none? { |cat| cat.id.to_s == params[:id] }
+  end
 
   def cat_params
     params.require(:cat)
