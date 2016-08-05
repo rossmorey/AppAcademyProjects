@@ -1,0 +1,11 @@
+<h1> <%= @sub.title %> </h1>
+<p>
+  About: <%= @sub.description %>
+</p>
+<p>
+  Mod: <%= @moderator.username %>
+</p>
+
+<% if current_user == @moderator %>
+  <%= button_to "Edit", edit_sub_url, method: :get %>
+<% end %>

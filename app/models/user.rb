@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
   validates :session_token, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true
 
+  has_many :subs,
+    primary_key: :id,
+    foreign_key: :moderator_id,
+    class_name: :Sub
+
   attr_reader :password
 
   def reset_session_token!

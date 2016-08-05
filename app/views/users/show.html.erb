@@ -1,3 +1,11 @@
-<h1>User Page</h1>
+<h1>Your Profile</h1>
 
-<h2><%= current_user.username %></h2>
+<h2>Hello, <%= current_user.username %></h2>
+
+<p>
+  <ul>
+    <% current_user.subs.each do |sub| %>
+    <li> <%= link_to sub.title, sub_url(sub) %> </li>
+    <% end %>
+  </ul>
+</p>

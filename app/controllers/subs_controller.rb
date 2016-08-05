@@ -1,11 +1,13 @@
 class SubsController < ApplicationController
 
   def index
-    Sub.all
+    @subs = Sub.all
+    render :index
   end
 
   def create
     @sub = Sub.new(sub_params)
+    @sub.moderator = current_user
     if @sub.save
       redirect_to sub_url(@sub)
     else
@@ -21,7 +23,7 @@ class SubsController < ApplicationController
 
   def show
     @sub = Sub.find_by(params[:id])
-    render :show
+    @moderator = @sub.moderator
   end
 
   def edit
@@ -35,7 +37,7 @@ class SubsController < ApplicationController
       redirect_to sub_url(@sub)
     else
       flash.now[:errors] = @sub.errors.full_messages
-      render :new
+      render :edit
     end
   end
 
