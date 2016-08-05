@@ -6,6 +6,15 @@
   Mod: <%= @moderator.username %>
 </p>
 
+<ul>
+  <% @sub.posts.each do |post| %>
+  <li><%= link_to post.title, post_url(post) %> </li>
+    <% if current_user == @moderator %>
+      <%= button_to "Delete Post", post_url(post), method: :delete %>
+    <% end %>
+  <% end %>
+</ul>
+
 <% if current_user == @moderator %>
   <%= button_to "Edit", edit_sub_url, method: :get %>
 <% end %>

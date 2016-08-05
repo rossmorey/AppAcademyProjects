@@ -22,7 +22,7 @@ class SubsController < ApplicationController
   end
 
   def show
-    @sub = Sub.find_by(params[:id])
+    @sub = Sub.find_by_id(params[:id])
     @moderator = @sub.moderator
   end
 

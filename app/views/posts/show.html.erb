@@ -1,0 +1,11 @@
+<h1> <%= @post.title %> </h1>
+<p>
+  http://<%= @post.url %>.com
+</p>
+<p>
+Body: <%= @post.content %>
+</p>
+
+<% if current_user == @author %>
+  <%= button_to "Edit", edit_post_url, method: :get %>
+<% end %>

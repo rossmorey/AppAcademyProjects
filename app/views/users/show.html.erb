@@ -2,10 +2,9 @@
 
 <h2>Hello, <%= current_user.username %></h2>
 
-<p>
+<h3>Subs you moderate</h3>
   <ul>
     <% current_user.subs.each do |sub| %>
     <li> <%= link_to sub.title, sub_url(sub) %> </li>
     <% end %>
   </ul>
-</p>
