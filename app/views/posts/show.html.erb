@@ -6,6 +6,15 @@
 Body: <%= @post.content %>
 </p>
 
+<p>
+  <% @post.comments.each do |c| %>
+    <%= c.content %>
+  <% end %>
+</p>
+<p>
+  <%= button_to "Write Comment", new_post_comment_url(@post), method: :get %>
+</p>
+
 <% if current_user == @author %>
   <%= button_to "Edit", edit_post_url, method: :get %>
 <% end %>
