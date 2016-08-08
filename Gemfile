@@ -56,3 +56,5 @@ group :development do
   gem 'binding_of_caller'
 
 end
+
+git filter-branch -f --env-filter "GIT_AUTHOR_NAME='rossmorey'; GIT_AUTHOR_EMAIL='ross.morey@gmail.com'; GIT_COMMITTER_NAME='rossmorey'; GIT_COMMITTER_EMAIL='ross.morey@gmail.com';" HEAD
