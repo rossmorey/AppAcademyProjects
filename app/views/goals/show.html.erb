@@ -1,0 +1,11 @@
+<h1>Goal: <%= @goal.title %></h1>
+
+<p>Description: <%= @goal.description %></p>
+
+<p>Creator: <%= @goal.user.username %></p>
+
+<p>Goal Visibility: <%= @goal.visibility %></p>
+
+<p>Goal Status: <%= @goal.completed %></p>
+
+<%= link_to "<< Back to all goals", goals_url %>

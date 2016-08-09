@@ -1,0 +1,51 @@
+<h1>Create A New Goal</h1>
+
+<form action="<%= goals_url %>" method="post">
+    <%= auth_token %>
+    <label>Title
+      <input type="text"
+        name="goal[title]"
+        value="<%= @goal.title %>">
+    </label>
+
+    <label>Description
+      <input type="text"
+        name="goal[description]"
+        value="<%= @goal.description %>">
+    </label>
+
+    <p>Is this a private goal?</p>
+
+    <label>Private
+      <input type="radio"
+        name="goal[visibility]"
+        value="Private"
+        <%= "selected" if @goal.visibility == "Private" %>>
+    </label>
+
+    <label>Public
+      <input type="radio"
+        name="goal[visibility]"
+        value="Public"
+        <%= "selected" if @goal.visibility == "Public" %>>
+    </label>
+
+    <p>Has this goal been completed?</p>
+
+    <label>Completed
+      <input type="radio"
+        name="goal[completed]"
+        value="Completed"
+        <%= "selected" if @goal.completed == "Completed" %>>
+    </label>
+
+    <label>In Progress
+      <input
+        type="radio"
+        name="goal[completed]"
+        value="In Progress"
+        <%= "selected" if @goal.completed == "In Progress" %>>
+    </label>
+
+    <input type="submit" value="Create Goal">
+</form>
