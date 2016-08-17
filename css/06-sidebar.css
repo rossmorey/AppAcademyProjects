@@ -1,1 +1,13 @@
 /* PHASE 6: Sidebar */
+.cat-image {
+  position: absolute;
+  width: 198px;
+  border: 1px #000 solid;
+  border-radius: 5px;
+  left: 20px;
+  bottom: 345px;
+}
+
+aside h3 {
+  font-size: 24px;
+}
