@@ -23,7 +23,6 @@ class Synth extends React.Component {
   }
 
   onKeyDown (e) {
-    console.log(e.which);
     let key = KEYS_TO_NOTE_NAMES[e.which];
     this.props.keyPressed(key);
   }
