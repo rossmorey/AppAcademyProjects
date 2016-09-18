@@ -1,0 +1,30 @@
+/* PHASE 3: Layout */
+main {
+  margin: auto;
+  /*background-color: #fff;*/
+  width: 900px;
+  /*height: 240px;*/
+  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+aside {
+  background-color: #fff;
+  float: left;
+  height: 444px;
+  width: 240px;
+  box-sizing: border-box;
+  border-right: 1px solid #ccc;
+  position: relative;
+  padding: 0px 20px;
+  padding-top: 96px;
+}
+
+section {
+
+  background-color: #fff;
+  float: left;
+  height: 240px;
+  width: 660px;
+}
