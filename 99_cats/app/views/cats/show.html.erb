@@ -1,0 +1,78 @@
+<h1><%= @cat.name %></h1>
+<% if flash[:notice] %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+  <% end %>
+<table>
+  <tr>
+    <td>
+      Age:
+    </td>
+    <td>
+      <%= @cat.age %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Color:
+    </td>
+    <td>
+      <%= @cat.color %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Sex:
+    </td>
+    <td>
+      <%= @cat.sex %>
+    </td>
+  </tr>
+</table>
+<p>
+  <%= @cat.description %>
+</p>
+<%= link_to "Edit cat", edit_cat_url(@cat) %>
+<%= link_to 'homepage', cats_url %>
+<%= button_to "Delete cat", cat_url(@cat), method: "delete" %>
+
+<h5>Rental Requests</h5>
+<table>
+  <thead>
+    <tr>
+      <th>
+        Start Date
+      </th>
+      <th>
+        End Date
+      </th>
+      <th>
+        Status
+      </th>
+      <th>
+        Actions
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% requests = @cat.cat_rental_requests.sort_by { |request| request.start_date } %>
+  <% requests.each do |request| %>
+    <tr>
+      <td>
+        <%= request.start_date %>
+      </td>
+      <td>
+        <%= request.end_date %>
+      </td>
+      <td>
+        <%= request.status %>
+      </td>
+      <td>
+        <%= button_to "Edit Request", edit_cat_cat_rental_request_url(cat_id: request.cat_id, id: request.id), method: "get" %>
+        <%= button_to "Approve Request", "/cat_rental_requests/#{request.id}", method: "patch" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

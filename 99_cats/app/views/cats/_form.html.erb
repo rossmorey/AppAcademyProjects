@@ -1,0 +1,46 @@
+<% if errors %>
+  Errors:
+  <ul>
+  <% errors.each do |error| %>
+    <li><%= error %></li>
+  <% end  %>
+  </ul>
+<% end %>
+
+<form action=<%= action == :new ? cats_url : cat_url(cat) %> method="post" >
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+
+  <label>
+    Name:
+    <input type="text" name="cat[name]" value=<%= cat.name %>>
+  </label>
+  <label>
+    Date:
+    <input type="date" name="cat[birth_date]" value=<%= cat.birth_date %> >
+  </label>
+  <label>
+    Sex:
+    M <input type="radio" name="cat[sex]" value = "M" <%= "checked" if cat.sex == 'M' %> >
+    F <input type="radio" name="cat[sex]" value = "F" <%= "checked" if cat.sex == 'F' %> >
+  </label>
+  <label>
+    Color:
+    <select name="cat[color]">
+      <option selected disabled> </option>
+      <option value="black" <%= "selected" if cat.color == "black" %> >black</option>
+      <option value="white" <%= "selected" if cat.color == "white" %> >white</option>
+      <option value="red" <%= "selected" if cat.color == "red" %> >red</option>
+      <option value="spots" <%= "selected" if cat.color == "spots" %> >spots</option>
+    </select>
+  </label>
+  <label>
+    <textarea name="cat[description]" rows="8" cols="40">
+      <%= cat.description %>
+    </textarea>
+  </label>
+  <input type="submit" value="Submit">
+
+
+</form>

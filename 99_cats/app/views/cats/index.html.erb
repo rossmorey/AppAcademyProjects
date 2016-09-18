@@ -1,0 +1,46 @@
+<h1>99 Cats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Color
+      </th>
+      <th>
+        Age
+      </th>
+      <th>
+        Sex
+      </th>
+      <th>
+        Description
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @cats.each do |cat| %>
+    <tr>
+      <td>
+        <%= link_to cat.name, cat_url(cat) %>
+      </td>
+      <td>
+        <%= cat.color %>
+      </td>
+      <td>
+        <%= cat.age %>
+      </td>
+      <td>
+        <%= cat.sex %>
+      </td>
+      <td>
+        <%= cat.description %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= link_to "Create a cat", new_cat_url %>
+<%= link_to "Make a new request", new_cat_rental_request_url %>
