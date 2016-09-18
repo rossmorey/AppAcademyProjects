@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blogger</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <p class="flash"><%= flash.notice %></p>
+
+  <div id="main">
+  <%= yield %>
+  </div>
+
+  <div id="sidebar">
+    <h3>Site Navigation</h3>
+    <ul>
+      <li><%= link_to "Articles", articles_path %></li>
+      <li><%= link_to "Tags", tags_path %></li>
+      <% if logged_in? %>
+        <li><%= link_to "Authors", authors_path %></li>
+      <% end %>
+      <br />
+      <h6>Popular Articles</h6>
+      <% popular = Article.all.sort_by { |article| -article.view_count } %>
+      <% 3.times do |i| %>
+        <li><%= link_to popular[i].title, article_path(popular[i]) %> (<%= popular[i].view_count %>)</li>
+      <% end %>
+      <br />
+      <li><%= link_to "Log In", new_author_session_path %></li>
+    </ul>
+  </div>
+
+  <div id="footer">
+  <hr>
+  <h6>
+    <% if logged_in? %>
+      <%= "Logged in as #{current_user.username}" %>
+      <%= link_to "(logout)", logout_path %>
+    <% else %>
+      <%= link_to "(login)", login_path %>
+    <% end %>
+  </h6>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<h1><%= @article.title %></h1>
+
+<p><%= image_tag @article.image.url if @article.image.exists? %></p>
+
+<br />
+
+<p>Author: <%= Author.find(@article.author_id).username %></p>
+<p>
+  Tags:
+  <% @article.tags.each do |tag| %>
+    <%= link_to tag.name, tag_path(tag) %>
+  <% end %>
+</p>
+<p>Views: <%= @article.view_count %></p>
+
+<br />
+
+<p><%= @article.body %></p>
+
+<br />
+
+<% if current_user == Author.find(@article.author_id) %>
+  <p><%= link_to "Edit Article", edit_article_path(@article) %> | <%= link_to "Delete Article", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %></p>
+  <br />
+<% end %>
+
+<h2>Comments (<%= @article.comments.size %>)</h2>
+
+<%= render partial: 'articles/comment', collection: @article.comments %>
+
+<%= render partial: 'comments/form' %>
+
+<%= link_to "<< Back to Articles List", articles_path %>
