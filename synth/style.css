@@ -1,0 +1,20 @@
+.notekey {
+  width: 100px;
+  height: 200px;
+  border: solid 1px black;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.active {
+  background: red;
+}
+
+#root {
+  width: 1080px;
+  margin: auto;
+}
+
+body {
+  text-align: center;
+}
